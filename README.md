@@ -74,7 +74,7 @@ Currently the expected format for shortcuts is a simple string with modifier key
 var commands = "ctrl s|ctrl n|meta s|meta alt j";
 ```
 
-The `meta` key stands for the Command Key (⌘) on Mac. The Mac Option Key (⌥) is represented by "alt". There are the values returned by Javascript;
+The `meta` key stands for the Command Key (⌘) on Mac. The Mac Option Key (⌥) is represented by "alt".
 
 Then send the commands to the plugin:
 
@@ -87,14 +87,16 @@ cordova.plugins.ExternalKeyboard.setKeyCommands(commands);
 On the page or in one of your modules, create the function `handleKeyCommand` like so:
 ```javascript
 window.handleKeyCommand = function(combo) {
-
+    // do something usefull
 }
 ```
 
-In Angular-JS it is quite possible to do
+In AngularJS or Ionic it is quite possible to define of overwrite the `handleKeyCommand` function in a controller or to send the combo to a service that will take care of it, e.g.
 ```javascript
 window.handleKeyCommand = function(combo) {
     $scope.handleCombo(combo)
+    // or using a service
+    Keymap.handleShortcut(combo);
 }
 ```
 
