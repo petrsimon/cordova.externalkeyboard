@@ -1,35 +1,42 @@
-Keyboard
-======
+# External Keyboard Plugin for Cordova, Phonegap and Ionic
 
-The `cordova.plugins.Keyboard` object provides functions to make interacting with the keyboard easier, and fires events to indicate that the keyboard will hide/show.
+The `cordova.plugins.ExternalKeyboard` provides an easy way to configure keyboard shortcuts for iOS 7 devices with an external bluetooth keyboard. 
 
-    cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
 
-Installation
-------------
-First run cordova plugin install com.atuhi.externalkeyboard
+# Installation
 
-Then open the iOS project in XCode and edit
+First install the plugin proper:
 
-1. in `MainViewController.h`
+    cordova plugin add https://github.com/petrsimon/cordova.externalkeyboard.git
+
+After running the command above, open the iOS project in XCode and add the following code:
+
+## In `MainViewController.h`
+
 replace 
-`@interface MainViewController : CDVViewController
-@end`
+
+```objective-c
+#import "ExternalKeyboard.h"
+@interface MainViewController : CDVViewController
+@end
+```
 
 with 
-`
+
+```objective-c
 @interface MainViewController : CDVViewController {
     NSMutableArray *commands;
 }
 
 - (void) setKeyCommands:(NSArray*) commands;
 @end
-`
+```
 
-2. in `MainViewController.m`
+## In `MainViewController.m`
+
 add 
 
-`
+```Objective-c
 - (BOOL)canBecomeFirstResponder {
     return YES;
 }
@@ -54,124 +61,46 @@ add
     NSLog(@"onKeyPress %@", jsStatement);
     [self.commandDelegate evalJs:jsStatement];
 }
-`
+```
 
 
 
 ### 
 
-Methods
--------
+# Usage
 
-- cordova.plugins.Keyboard.hideKeyboardAccessoryBar
-- cordova.plugins.Keyboard.close
-- cordova.plugins.Keyboard.disableScroll
+## Setting up 
+Currently the expected format for shortcuts is a simple string with modifier keys and input keys delimited by a space and the commands delimited by `|`, e.g.:
+```javascript
+var commands = "ctrl s|ctrl n|meta s|meta alt j";
+```
 
-Properties
---------
+The `meta` key stands for the Command Key (⌘) on Mac. The Mac Option Key (⌥) is represented by "alt".
 
-- cordova.plugins.Keyboard.isVisible
+Then send the commands to the plugin:
 
-Events
---------
-
-These events are fired on the window. 
-
-- native.keyboardshow
-  * A number `keyboardHeight` is given on the event object, which is the pixel height of the keyboard.
-- native.keyboardhide
-
-Permissions
------------
-
-#### config.xml
-
-            <feature name="Keyboard">
-                <param name="ios-package" value="IonicKeyboard" onload="true" />
-            </feature>
+```javascript
+cordova.plugins.ExternalKeyboard.setKeyCommands(commands);
+```
 
 
-Keyboard.hideKeyboardAccessoryBar
-=================
+## Handling the shortcuts
+On the page or in one of your modules, create the function `handleKeyCommand` like so:
+```javascript
+window.handleKeyCommand = function(combo) {
+    // do something usefull
+}
+```
 
-Hide the keyboard accessory bar with the next, previous and done buttons.
+In AngularJS or Ionic it is quite possible to define of overwrite the `handleKeyCommand` function in a controller or to send the combo to a service that will take care of it, e.g.
+```javascript
+window.handleKeyCommand = function(combo) {
+    $scope.handleCombo(combo)
+    // or using a service
+    Keymap.handleShortcut(combo);
+}
+```
 
-    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
-
-Supported Platforms
--------------------
-
-- iOS
-
-
-Keyboard.close
-=================
-
-Close the keyboard if it is open.
-
-    cordova.plugins.Keyboard.close();
-
-Supported Platforms
--------------------
-
-- iOS, Android
-
-    
-Keyboard.disableScroll
-=================
-
-Disable native scrolling, useful if you are using JavaScript to scroll
-
-    cordova.plugins.Keyboard.disableScroll(true);
-    cordova.plugins.Keyboard.disableScroll(false);
-
-Supported Platforms
--------------------
-
-- iOS
-
-
-native.keyboardshow
-=================
-
-This event fires when the keyboard will be shown
-
-    window.addEventListener('native.keyboardshow', keyboardShowHandler);
-    
-    function keyboardShowHandler(e){
-        alert('Keyboard height is: ' + e.keyboardHeight);
-    }
-
-Properties
------------
-
-keyboardHeight: the height of the keyboard in pixels 
-
-
-Supported Platforms
--------------------
-
-- iOS, Android
-
-
-native.keyboardhide
-=================
-
-This event fires when the keyboard will hide
-
-    window.addEventListener('native.keyboardhide', keyboardHideHandler);
-    
-    function keyboardHideHandler(e){
-        alert('Goodnight, sweet prince');
-    }
-
-Properties
------------
-
-None
-
-Supported Platforms
--------------------
+# Supported Platforms
 
 - iOS
