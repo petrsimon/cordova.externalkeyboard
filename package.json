@@ -1,0 +1,16 @@
+{
+    "version": "1.0.0",
+    "name": "com.atuhi.btkeyboard",
+    "cordova_name": "BTKeyboard",
+    "description": "Bluetooth Keyboard Plugin",
+    "repo": "https://github.com/driftyco/ionic-plugins-keyboard.git",
+    "issue": "https://github.com/driftyco/ionic-plugins-keyboard/issues",
+    "repo": "https://github.com/petrsimon/cordova-plugin-btkeyboard.git",
+    "issue":"https://github.com/petrsimon/cordova-plugin-btkeyboard/issues",
+    "license": "MIT",
+    "keywords": [
+        "bluetooth",
+        "hardware",
+        "keyboard"
+    ]
+}

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    id="com.atuhi.externalkeyboard"
+    version="1.0.0">
+    <name>External Keyboard</name>
+    <description>External Keyboard Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>bluetooth,hardware,keyboard</keywords>
+    <repo>https://github.com/petrsimon/cordova-plugin-externalkeyboard.git</repo>
+    <issue>https://github.com/petrsimon/cordova-plugin-externalkeyboard/issues</issue>
+
+  <js-module src="www/keyboard.js" name="keyboard">
+    <clobbers target="cordova.plugins.ExternalKeyboard" />
+  </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="ExternalKeyboard">
+                <param name="ios-package" value="ExternalKeyboard" onload="true" />
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/ExternalKeyboard.h" />
+        <source-file src="src/ios/ExternalKeyboard.m" />
+    </platform>
+
+</plugin>
