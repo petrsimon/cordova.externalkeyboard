@@ -16,6 +16,7 @@ After running the command above, open the iOS project in XCode and add the follo
 replace 
 
 ```objective-c
+#import "ExternalKeyboard.h"
 @interface MainViewController : CDVViewController
 @end
 ```
