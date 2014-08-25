@@ -1,16 +1,18 @@
 # External Keyboard Plugin for Cordova, Phonegap and Ionic
 
-The `cordova.plugins.ExternalKeyboard` provides an easy way to configure keyboard shortcuts for iOS 7 devices with an external keyboard attached. 
+The `cordova.plugins.ExternalKeyboard` provides an easy way to configure keyboard shortcuts for iOS 7 devices with an external bluetooth keyboard. 
 
-    cordova plugin add https://github.com/petrsimon/cordova.externalkeyboard.git
 
 # Installation
 
-This plugin requires a little bit of manual installation.
+First install the plugin proper:
 
-After running the command above, open the iOS project in XCode and edit
+    cordova plugin add https://github.com/petrsimon/cordova.externalkeyboard.git
 
-1. in `MainViewController.h`
+After running the command above, open the iOS project in XCode and add the following code:
+
+## In `MainViewController.h`
+
 replace 
 
 ```objective-c
@@ -29,7 +31,8 @@ with
 @end
 ```
 
-2. in `MainViewController.m`
+## In `MainViewController.m`
+
 add 
 
 ```Objective-c
