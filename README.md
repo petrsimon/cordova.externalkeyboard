@@ -70,7 +70,7 @@ add
 # Usage
 
 ## Setting up 
-Currently the expected format for shortcuts is a simple string with modifier keys and input keys delimited by a space and the commands delimited by `|`, e.g.:
+Currently the expected format for shortcuts is a simple string with modifier keys and input keys delimited by a space and the commands delimited by a configurable string such as `|`:
 ```javascript
 var commands = "ctrl s|ctrl n|meta s|meta alt j";
 ```
@@ -80,7 +80,7 @@ The `meta` key stands for the Command Key (⌘) on Mac. The Mac Option Key (⌥)
 Then send the commands to the plugin:
 
 ```javascript
-cordova.plugins.ExternalKeyboard.setKeyCommands(commands);
+cordova.plugins.ExternalKeyboard.setKeyCommands(commands, delimiter);
 ```
 
 
