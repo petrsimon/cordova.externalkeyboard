@@ -80,6 +80,8 @@ The `meta` key stands for the Command Key (⌘) on Mac. The Mac Option Key (⌥)
 Then send the commands to the plugin:
 
 ```javascript
+var commands = "ctrl s|ctrl n|meta s|meta alt j",
+    delimiter = "|";
 cordova.plugins.ExternalKeyboard.setKeyCommands(commands, delimiter);
 ```
 
