@@ -42,7 +42,6 @@ add
 }
 
 - (void) setKeyCommands: (NSMutableArray*) cmds {
-    NSLog(@"Setting commands %@", cmds);
     commands = cmds;
 }
 
