@@ -1,6 +1,6 @@
 # External Keyboard Plugin for Cordova, Phonegap and Ionic
 
-The `cordova.plugins.ExternalKeyboard` provides an easy way to configure keyboard shortcuts for iOS 7 devices with an external bluetooth keyboard. 
+The `cordova.plugins.ExternalKeyboard` provides an easy way to configure keyboard shortcuts for iOS 7 devices with an external bluetooth keyboard. Currently the plugin requires a little bit of manual installation (see below).
 
 
 # Installation
@@ -16,7 +16,6 @@ After running the command above, open the iOS project in XCode and add the follo
 replace 
 
 ```objective-c
-#import "ExternalKeyboard.h"
 @interface MainViewController : CDVViewController
 @end
 ```
@@ -24,6 +23,7 @@ replace
 with 
 
 ```objective-c
+#import "ExternalKeyboard.h"
 @interface MainViewController : CDVViewController {
     NSMutableArray *commands;
 }
@@ -42,7 +42,6 @@ add
 }
 
 - (void) setKeyCommands: (NSMutableArray*) cmds {
-    NSLog(@"Setting commands %@", cmds);
     commands = cmds;
 }
 
@@ -53,12 +52,9 @@ add
 
 - (void) onKeyPress:(UIKeyCommand*) cmd {
     NSLog(@"onKeyPress");
-    
     NSString *combo = [ExternalKeyboard getCombo:cmd];
-    
     NSLog(@"COMBO [%@]", combo);
     NSString *jsStatement = [NSString stringWithFormat:@"handleKeyCommand('%@')", combo];
-    NSLog(@"onKeyPress %@", jsStatement);
     [self.commandDelegate evalJs:jsStatement];
 }
 ```
@@ -69,8 +65,8 @@ add
 
 # Usage
 
-## Setting up 
-Currently the expected format for shortcuts is a simple string with modifier keys and input keys delimited by a space and the commands delimited by `|`, e.g.:
+## Set up 
+Currently the expected format for shortcuts is a simple string with modifier keys and input keys delimited by a space and the commands delimited by a configurable string such as `|`:
 ```javascript
 var commands = "ctrl s|ctrl n|meta s|meta alt j";
 ```
@@ -80,7 +76,9 @@ The `meta` key stands for the Command Key (⌘) on Mac. The Mac Option Key (⌥)
 Then send the commands to the plugin:
 
 ```javascript
-cordova.plugins.ExternalKeyboard.setKeyCommands(commands);
+var commands = "ctrl s|ctrl n|meta s|meta alt j",
+    delimiter = "|";
+cordova.plugins.ExternalKeyboard.setKeyCommands(commands, delimiter);
 ```
 
 
@@ -92,7 +90,7 @@ window.handleKeyCommand = function(combo) {
 }
 ```
 
-In AngularJS or Ionic it is quite possible to define of overwrite the `handleKeyCommand` function in a controller or to send the combo to a service that will take care of it, e.g.
+In AngularJS or Ionic it is quite possible to define or overwrite the `handleKeyCommand` function in a controller or to send the combo to a service that will take care of it, e.g.
 ```javascript
 window.handleKeyCommand = function(combo) {
     $scope.handleCombo(combo)
