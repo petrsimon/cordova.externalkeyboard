@@ -94,7 +94,7 @@ window.handleKeyCommand = function(combo) {
 }
 ```
 
-In AngularJS or Ionic it is quite possible to define of overwrite the `handleKeyCommand` function in a controller or to send the combo to a service that will take care of it, e.g.
+In AngularJS or Ionic it is quite possible to define or overwrite the `handleKeyCommand` function in a controller or to send the combo to a service that will take care of it, e.g.
 ```javascript
 window.handleKeyCommand = function(combo) {
     $scope.handleCombo(combo)
