@@ -53,12 +53,9 @@ add
 
 - (void) onKeyPress:(UIKeyCommand*) cmd {
     NSLog(@"onKeyPress");
-    
     NSString *combo = [ExternalKeyboard getCombo:cmd];
-    
     NSLog(@"COMBO [%@]", combo);
     NSString *jsStatement = [NSString stringWithFormat:@"handleKeyCommand('%@')", combo];
-    NSLog(@"onKeyPress %@", jsStatement);
     [self.commandDelegate evalJs:jsStatement];
 }
 ```
