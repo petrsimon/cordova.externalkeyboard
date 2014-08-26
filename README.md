@@ -69,7 +69,7 @@ add
 
 # Usage
 
-## Setting up 
+## Set up 
 Currently the expected format for shortcuts is a simple string with modifier keys and input keys delimited by a space and the commands delimited by a configurable string such as `|`:
 ```javascript
 var commands = "ctrl s|ctrl n|meta s|meta alt j";
