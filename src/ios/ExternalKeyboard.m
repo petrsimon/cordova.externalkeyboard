@@ -15,18 +15,13 @@
 }
 
 - (NSMutableArray*) prepareCommands:(NSString*) _cmds :(NSString*) _sep {
+    NSLog(@"Cordova ExternalKeyboard setKeyCommands: %@", _cmds);
+    
     NSMutableArray *commands = [[NSMutableArray alloc] init];
     NSArray *cmds = [_cmds componentsSeparatedByString:_sep];
-    NSLog(@"Cordova ExternalKeyboard setKeyCommands: %@", _cmds);
+    
     for (NSString* cmd in cmds)
     {
-        BOOL meta = [cmd rangeOfString:@"meta" options: NSCaseInsensitiveSearch].location != NSNotFound;
-        //        BOOL ctrl = [cmd rangeOfString:@"ctrl" options: NSCaseInsensitiveSearch].location != NSNotFound;
-        BOOL option = [cmd rangeOfString:@"alt" options: NSCaseInsensitiveSearch].location != NSNotFound;
-        //        BOOL shift = [cmd rangeOfString:@"shift" options: NSCaseInsensitiveSearch].location != NSNotFound;
-        //
-        
-        NSLog(@"CMD %@", cmd);
         
         NSMutableArray *parts = [[cmd componentsSeparatedByString:@" "] mutableCopy];
         int size = [parts count];
@@ -34,28 +29,23 @@
         //FIXME: possibly add support for function keys, which are missing on Logitech keyboard I've got
         if(size>1){
             NSString *input = [parts objectAtIndex:size-1];
-            //        if(isMetaOption){
-            //            [commands addObject:[UIKeyCommand keyCommandWithInput:input modifierFlags:UIKeyModifierCommand | UIKeyModifierAlternate action:@selector(onKeyPress:)]];
-            //        } else {
             [parts removeLastObject];
             NSString *joinedParts = [parts componentsJoinedByString:@" "];
-            UIKeyModifierFlags flags = [self getModifierFlag:joinedParts];
-            UIKeyModifierFlags f = UIKeyModifierCommand | UIKeyModifierAlternate;
-            if(meta && option){
-                NSLog(@"FLAGS %d = %d", flags, f);
-            }
             
+            UIKeyModifierFlags flags = [self getModifierFlags:joinedParts];
+            
+            // using runtime selector, because onKeyPress is a method of MainViewController
             SEL sel = NSSelectorFromString(@"onKeyPress:");
             [commands addObject:[UIKeyCommand keyCommandWithInput:input modifierFlags:flags action:sel]];
-            
-            //        }
+        } else {
+            NSLog(@"ExternalKeyboard: Single key shortcut not supported, thus ignoring [%@]", cmd);
         }
     }
     
     return commands;
 }
 
-- (UIKeyModifierFlags) getModifierFlag:(NSString*) mods {
+- (UIKeyModifierFlags) getModifierFlags:(NSString*) mods {
     
     UIKeyModifierFlags flag = 0;
     
@@ -64,7 +54,7 @@
     BOOL option = [mods rangeOfString:@"alt" options: NSCaseInsensitiveSearch].location != NSNotFound;
     BOOL shift = [mods rangeOfString:@"shift" options: NSCaseInsensitiveSearch].location != NSNotFound;
     
-    NSLog(@"getKeyCMD %@: meta=%hhd, option=%hhd, ctrl=%hhd, shift=%hhd",mods, meta, option, ctrl, shift);
+    //NSLog(@"getKeyCMD %@: meta=%hhd, option=%hhd, ctrl=%hhd, shift=%hhd",mods, meta, option, ctrl, shift);
     
     // multiple
     if (meta && option) {

@@ -2,13 +2,13 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="com.atuhi.externalkeyboard"
-    version="1.0.0">
+    version="0.0.1">
     <name>External Keyboard</name>
     <description>External Keyboard Plugin</description>
     <license>Apache 2.0</license>
     <keywords>bluetooth,hardware,keyboard</keywords>
-    <repo>https://github.com/petrsimon/cordova-plugin-externalkeyboard.git</repo>
-    <issue>https://github.com/petrsimon/cordova-plugin-externalkeyboard/issues</issue>
+    <repo>https://github.com/petrsimon/cordova.externalkeyboard.git</repo>
+    <issue>https://github.com/petrsimon/cordova.externalkeyboard/issues</issue>
 
   <js-module src="www/keyboard.js" name="keyboard">
     <clobbers target="cordova.plugins.ExternalKeyboard" />
