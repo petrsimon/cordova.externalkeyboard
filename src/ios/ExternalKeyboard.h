@@ -4,5 +4,6 @@
 
 - (void) setKeyCommands: (CDVInvokedUrlCommand*) command;
 + (NSString*) getCombo:(UIKeyCommand*) cmd;
+- (void) redraw: (CDVInvokedUrlCommand*) command;
 @end
 

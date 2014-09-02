@@ -4,6 +4,11 @@
 
 @implementation ExternalKeyboard
 
+- (void) redraw: (CDVInvokedUrlCommand*) command {
+        MainViewController *vc = (MainViewController*) self.viewController;
+            [vc.view setNeedsDisplay];
+}
+
 - (void) setKeyCommands: (CDVInvokedUrlCommand*) command {
     NSString* _cmds = [command.arguments objectAtIndex:0];
     NSString* _sep = [command.arguments objectAtIndex:1];
