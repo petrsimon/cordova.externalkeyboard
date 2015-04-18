@@ -1,5 +1,7 @@
 # External Keyboard Plugin for Cordova, Phonegap and Ionic
 
+This project is part of [Atuhi](http://atuhi.com)
+
 The `cordova.plugins.ExternalKeyboard` provides an easy way to configure keyboard shortcuts for iOS 7 devices with an external bluetooth keyboard. Currently the plugin requires a little bit of manual installation (see below).
 
 
@@ -66,10 +68,14 @@ add
 # Usage
 
 ## Set up 
+
 Currently the expected format for shortcuts is a simple string with modifier keys and input keys delimited by a space and the commands delimited by a configurable string such as `|`:
+
 ```javascript
-var commands = "ctrl s|ctrl n|meta s|meta alt j";
+var commands = "ctrl s|ctrl n|meta s|meta alt j|up|shift up";
 ```
+
+You can use arrow keys (`up`, `down`, `left`, `right`) and `enter`, `space`, `tab`, `del` either as single key commands or with combination with modifier.
 
 The `meta` key stands for the Command Key (⌘) on Mac. The Mac Option Key (⌥) is represented by "alt".
 
