@@ -75,7 +75,7 @@ Currently the expected format for shortcuts is a simple string with modifier key
 var commands = "ctrl s|ctrl n|meta s|meta alt j|up|shift up";
 ```
 
-You can use arrow keys (`up`, `down`, `left`, `right`) and `enter`, `space`, `tab`, `del` either as single key commands or with combination with modifier.
+You can use arrow keys (`up`, `down`, `left`, `right`) and `enter`, `space`, `tab`, `del` either as single key commands or with combination with modifier. Please notice, that these keys will stop fullfilling their default funtion.
 
 The `meta` key stands for the Command Key (⌘) on Mac. The Mac Option Key (⌥) is represented by "alt".
 
