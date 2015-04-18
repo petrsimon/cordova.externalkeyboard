@@ -2,7 +2,7 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     id="com.atuhi.externalkeyboard"
-    version="0.0.1">
+    version="1.0.0">
     <name>External Keyboard</name>
     <description>External Keyboard Plugin</description>
     <license>Apache 2.0</license>
