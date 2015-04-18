@@ -1,12 +1,23 @@
-
-var argscheck = require('cordova/argscheck'),
-    utils = require('cordova/utils'),
-    exec = require('cordova/exec');
+var exec = require('cordova/exec');
 
 var pluginName = 'ExternalKeyboard';
 
 var ExternalKeyboard = function() {
 };
+
+ExternalKeyboard.redraw = function(){
+    var deferred = $.Deferred();
+    exec(
+        function (result) {
+            deferred.resolve(result);
+        },
+        function (error) {
+            deferred.reject(error);
+        },
+        pluginName, "redraw", []);
+    return deferred.promise();
+}
+
 
 ExternalKeyboard.setKeyCommands = function(commands, delimiter){
     var deferred = $.Deferred();
