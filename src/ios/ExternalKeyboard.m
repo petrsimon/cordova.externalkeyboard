@@ -74,6 +74,7 @@
     BOOL ctrl = [mods rangeOfString:@"ctrl" options: NSCaseInsensitiveSearch].location != NSNotFound;
     BOOL option = [mods rangeOfString:@"alt" options: NSCaseInsensitiveSearch].location != NSNotFound;
     BOOL shift = [mods rangeOfString:@"shift" options: NSCaseInsensitiveSearch].location != NSNotFound;
+    BOOL caps = [mods rangeOfString:@"caps" options: NSCaseInsensitiveSearch].location != NSNotFound;
     
     //NSLog(@"getKeyCMD %@: meta=%hhd, option=%hhd, ctrl=%hhd, shift=%hhd",mods, meta, option, ctrl, shift);
     
@@ -120,14 +121,20 @@
         flag = UIKeyModifierShift;
     }
     
+    else if (caps){
+        flag = UIKeyModifierAlphaShift;
+    }
+    
     return flag;
 }
 
 + (NSString*) getCombo:(UIKeyCommand*) cmd {
-    
-    NSLog(@"Cordova ExternalKeyboard INPUT: [%@]", cmd.input);
     UIKeyModifierFlags flags = cmd.modifierFlags;
     NSString *input = cmd.input;
+    //NSUInteger length = [input length];
+
+    //NSLog(@"Cordova ExternalKeyboard INPUT: [%@] len=%d flags=%d", cmd.input, (unsigned long)length, (unsigned long)cmd.modifierFlags);
+    
     
     NSMutableArray *modifierSymbols = [[NSMutableArray alloc] init];
     
@@ -145,6 +152,10 @@
     
     if((flags & UIKeyModifierShift) == UIKeyModifierShift){
         [modifierSymbols addObject:@"shift"];
+    }
+    
+    if((flags & UIKeyModifierAlphaShift) == UIKeyModifierAlphaShift){
+        [modifierSymbols addObject:@"caps"];
     }
     
     if ([input  isEqual: @"\r"]){

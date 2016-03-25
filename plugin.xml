@@ -16,6 +16,7 @@
 
     <!-- ios -->
     <platform name="ios">
+        <hook type="after_plugin_install" src="scripts/iosAfterInstall.js" />
         <config-file target="config.xml" parent="/*">
             <feature name="ExternalKeyboard">
                 <param name="ios-package" value="ExternalKeyboard" onload="true" />
