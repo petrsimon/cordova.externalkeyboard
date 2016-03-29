@@ -2,7 +2,7 @@
 
 This project is part of [Atuhi](http://atuhi.com)
 
-The `cordova.plugins.ExternalKeyboard` provides an easy way to configure keyboard shortcuts for iOS 7 devices with an external bluetooth keyboard. Currently the plugin requires a little bit of manual installation (see below).
+The `cordova.plugins.ExternalKeyboard` provides an easy way to configure keyboard shortcuts for iOS 7 devices with an external bluetooth keyboard. The plugin runs an `after-install` hook to modify the MainViewController.h and MainViewController.m files as described below.
 
 
 # Installation
@@ -11,7 +11,7 @@ First install the plugin proper:
 
     cordova plugin add https://github.com/petrsimon/cordova.externalkeyboard.git
 
-After running the command above, open the iOS project in XCode and add the following code:
+When the plugin is installed, the iosAfterInstall.js hook script will modify the MainViewController.h and MainViewController.m files as shown here:
 
 ## In `MainViewController.h`
 
@@ -75,9 +75,9 @@ Currently the expected format for shortcuts is a simple string with modifier key
 var commands = "ctrl s|ctrl n|meta s|meta alt j|up|shift up";
 ```
 
-You can use arrow keys (`up`, `down`, `left`, `right`) and `enter`, `space`, `tab`, `del` either as single key commands or with combination with modifier. Please notice, that these keys will stop fullfilling their default funtion.
+You can use arrow keys (`up`, `down`, `left`, `right`) and `enter`, `space`, `tab`, `del` either as single key commands or with combination with modifier. Please notice, that these keys will stop fulfilling their default function. Supported modifier keys are `meta`, `ctrl`, `alt`, `shift` and `caps`.
 
-The `meta` key stands for the Command Key (⌘) on Mac. The Mac Option Key (⌥) is represented by "alt".
+The `meta` key stands for the Command Key (⌘) on Mac. The Mac Option Key (⌥) is represented by "alt". The `caps` key stands for the CapsLock key. CapsLock cannot be combined with any other modifier keys.
 
 Then send the commands to the plugin:
 
