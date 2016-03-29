@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+module.exports = function(context) {
 
 // This hook updates Cordova MainViewController.h & MainViewController.m
 // files when installing ExternalKeyboard in iOS platform project.
@@ -7,8 +7,8 @@ var rc = '';
 var fs = require('fs');
 var path = require('path');
 
-var rootdir = process.argv[2];
-var cmdline = process.env.CORDOVA_CMDLINE;
+var rootdir = context.opts.projectRoot; // process.argv[2];
+// var cmdline = process.env.CORDOVA_CMDLINE;
 if ( rootdir /* && cmdline.indexOf('cordova platform add ios') >= 0 */ ) {
 
 	try {
@@ -120,3 +120,6 @@ if ( rootdir /* && cmdline.indexOf('cordova platform add ios') >= 0 */ ) {
 		process.exit(1);
 	}
 }
+
+}
+
